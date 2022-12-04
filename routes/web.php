@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Address;
+use App\Models\City;
 use App\Models\Comment;
 use App\Models\Reservation;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -19,56 +22,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    // $results = User::select('name', 'email')
-    //     ->addSelect([
-    //         'worst_rating' => Comment::select('rating')
-    //             ->whereColumn('user_id', 'users.id')
-    //             ->orderBy('rating', 'asc')
-    //             ->limit(1)
-    //     ])
-    //     ->get()->toArray();
+    // $results = Address::find(1);
+    // $results = User::find(1);
+    // $results = Comment::find(1);
 
-    // $results = User::orderByDesc(
-    //     Reservation::select('check_in')
-    //         ->whereColumn('user_id', 'users.id')
-    //         ->orderBy('check_in', 'desc')
-    //         ->limit(1)
-    // )->select('id', 'name')->get()->toArray();
+    // $results = Room::where('room_size', 3)->get();
 
-    // $results = Reservation::chunk(2, function ($reservations) {
-    //     foreach ($reservations as $reservation) {
-    //         echo $reservation->id;
+    // foreach ($results as $rooms) {
+    //     foreach ($rooms->cities as $city) {
+    //         echo $city->name . '<br>';
+    //         echo $city->pivot->room_id . '<br>';
+    //         dump($city->pivot->created_at);
     //     }
-    // });
+    // }
 
-    // $results = User::find(1)->toArray();
-    // $results = User::where('email', 'like', '%@%')->first()->toArray();
-    // $results = User::where('email', 'like', '%@example.com%')->firstOr(function () {
-    //     User::where('id', 1)->update(['email' => 'lyly92@example.com']);
-    // });
-    // $results = User::findOrFail(100); // firstOrFail also possible
-    // $results = Comment::withoutGlobalScope('rating')->get();
-    // $results = Comment::rating(1)->get();
-    // $results = Comment::all()->toArray();
-    // $results = Comment::all()->count();
-    // $results = Comment::all()->toJson();
-
-    // $comments = Comment::all();
-    // $results = $comments->map(function ($comment) {
-    //     return $comment->content;
-    // });
-    // $results = $comments->reject(function ($comment) {
-    //     return $comment->rating < 3;
-    // });
-    // $results = $comments->diff($results);
-
-    $results = Comment::create([
-        'user_id' => 1,
-        'rating' => 5,
-        'content' => 'comment content',
-    ]);
-
-    dump($results->toArray());
+    $results = Comment::find(6);
+    dump($results->country->name);
 
     return view('welcome');
 });

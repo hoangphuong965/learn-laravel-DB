@@ -14,15 +14,14 @@ class Comment extends Model
 
     protected $fillable = ['rating', 'content', 'user_id'];
 
-    // protected static function booted()
-    // {
-    //     static::addGlobalScope('rating', function (Builder $builder) {
-    //         $builder->where('rating', '>', 2);
-    //     });
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
-    // public function scopeRating($query, int $value = 4)
-    // {
-    //     return $query->where('rating', '>', $value);
-    // }
+    public function country()
+    {                                              // User::class, FK Address::class , Fk Comment::class, User:class 
+        return $this->hasOneThrough(Address::class, User::class, 'id', 'user_id', 'user_id', 'id')
+            ->select('country as name');
+    }
 }
