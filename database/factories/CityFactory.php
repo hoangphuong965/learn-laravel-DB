@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\City>
  */
-class CommentFactory extends Factory
+class CityFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'content' => fake()->text(500),
-            'user_id' => fake()->numberBetween(1, 3),
-            'rating' => fake()->numberBetween(1, 5),
+            'name' => fake()->unique()->city(),
         ];
     }
 }
